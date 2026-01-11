@@ -14,4 +14,4 @@ New changes
 Side notes
 - Craps is still yet to be added
 - Ability to play different games after playing one is also yet to be added
--A file to track how many times the player left without any money left is planned to be added around 3rd quarter exam week 
+- A file to track how many times the player left without any money left is planned to be added around 3rd quarter exam week 
