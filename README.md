@@ -7,8 +7,8 @@ This program is a casino simulation called Casino Royale where we try to teach h
 
 New changes
 1. added username selection ( yet to be used in games, currently only used in menu 
-2.added slots' money/bet system to blackjack 
- minor update to guide for blackjack's money system
+2. added slots' money/bet system to blackjack 
+3. minor update to guide for blackjack's money system
 
 
 Side notes
