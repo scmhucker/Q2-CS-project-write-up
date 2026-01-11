@@ -6,9 +6,9 @@ This program is a casino simulation called Casino Royale where we try to teach h
 
 
 New changes
--added username selection ( yet to be used in games, currently only used in menu)
--added slots' money/bet system to blackjack 
--minor update to guide for blackjack's money system
+ -added username selection ( yet to be used in games, currently only used in menu)
+ -added slots' money/bet system to blackjack 
+ -minor update to guide for blackjack's money system
 
 Side notes
 - Craps is still yet to be added
