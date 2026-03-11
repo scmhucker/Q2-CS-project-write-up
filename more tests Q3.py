@@ -169,6 +169,13 @@ if menuchoice == 1:
             print(f"Current balance: ${balance}")
 
 if menuchoice == 3:
+    print("Casino Royale was founded by Isabelo, Dilan, and Joacquin for the entertainment of all,")
+    print("At NO FINANCIAL RISK!!!")
+    print("It was also founded for the sake of learning, teaching others how random variables work,")
+    print("and for simulating how a casino would probably go, so you don't make the same mistake.")
+    print("")
+    print("HOW TO PLAY")
+    print("")
     print("Stars = Probability of paying out / profitting")
     print("BLACKJACK - ☆☆")
     print("You will make a bet and the game will start shortly after.")
@@ -182,6 +189,8 @@ if menuchoice == 3:
     print("You win if the same symbol is rolled 3 in a row and lose otherwise.")
     print("Your payout is decided by your winning symbol.")
     print("Different symbols give different multipliers on win.")
+    print("If you want to stop here, just ask to stop after a roll")
+    print("You can only exit AFTER A ROLL so think twice before entering".)
     
 
 if menuchoice == 2:
@@ -236,5 +245,6 @@ if menuchoice == 2:
 if __name__ == '__main__':
 
     main()
+
 
 
