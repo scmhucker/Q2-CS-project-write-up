@@ -177,7 +177,7 @@ if menuchoice == 3:
     print("HOW TO PLAY")
     print("")
     print("Stars = Probability of paying out / profitting")
-    print("BLACKJACK - ☆☆")
+    print("BLACKJACK - ☆")
     print("You will make a bet and the game will start shortly after.")
     print("You get cards and your score is the sum of the cards' value.")
     print("The winner is whoever has more score by the time both players stop.")
