@@ -96,6 +96,8 @@ try:
                 print("Cards Player Has:", pc)
                 print("Score Of The Player:", ps)
                 print("\n")
+                pc = [deck.pop(), deck.pop()]
+                dc = [deck.pop(), deck.pop()]
                 choice = input('What do you want? ["play" to request another card, "stop" to stop]: ').lower()
                 if choice == "play":
                     nc = deck.pop()
