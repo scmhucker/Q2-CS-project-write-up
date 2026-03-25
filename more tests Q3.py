@@ -55,11 +55,6 @@ try:
         else:
             return int(card[0])
 
-
-    random.shuffle(deck)
-    pc = [deck.pop(), deck.pop()]
-    dc = [deck.pop(), deck.pop()]
-
 # input to decide what next
 # also the game Craps will be added someday but uh the doc draft didn't mention it so yeah
     if menuchoice == 99:
