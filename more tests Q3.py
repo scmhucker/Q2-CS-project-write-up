@@ -65,6 +65,8 @@ try:
     if menuchoice == 99:
         print("Casino Royale!")
         print("")
+        print(balance)
+        print("")
         print(f"WELCOME {user}!, What would you like to do this fine evening?")
         print("1) Play Blackjack")
         print("2) Play the Slot Machine")
