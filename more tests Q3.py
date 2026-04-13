@@ -11,7 +11,8 @@ try:
         user = input("What is your name?: ")
         print("What Mode do you want")
         print("A. Poor")
-        print("B.
+        print("B. Middle Class")
+        print("C. Rich")
         balance = 100
 
 
