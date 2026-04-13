@@ -9,7 +9,7 @@ try:
     with open(filename, 'r') as file:
 
         user = input("What is your name?: ")
-        print("What Mode do you want")
+        mode = input("What Mode do you want")
         print("A. Poor")
         print("B. Middle Class")
         print("C. Rich")
@@ -94,6 +94,7 @@ try:
 
             if bet > balance:
                 print("Insufficient funds")
+                print("Do you want to beg")
 
             while True:
                 ps = sum(card_value(card) for card in pc)
