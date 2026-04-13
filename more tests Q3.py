@@ -9,6 +9,9 @@ try:
     with open(filename, 'r') as file:
 
         user = input("What is your name?: ")
+        print("What Mode do you want")
+        print("A. Poor")
+        print("B.
         balance = 100
 
 
