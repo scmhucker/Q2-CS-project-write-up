@@ -1,1 +1,241 @@
+import json
+import random
+
+# LOAD STARTING MONEY
+try:
+    filename = "starting_money.json"
+    with open(filename, 'r') as file:
+        data = json.load(file)
+        moneylist = [item["Money"] for item in data]
+
+except FileNotFoundError:
+    print("Error: The file 'starting_money.json' was not found.")
+    exit()
+except json.JSONDecodeError as e:
+    print(f"Failed to decode JSON: {e}")
+    exit()
+
+# USER SETUP
+user = input("What is your name?: ")
+
+print("A. Poor")
+print("B. Middle Class")
+print("C. Rich")
+mode = input("What mode will you play today?: ").lower()
+
+if mode == "a":
+    balance = moneylist[0]
+elif mode == "b":
+    balance = moneylist[1]
+elif mode == "c":
+    balance = moneylist[2]
+else:
+    print("Invalid mode selected.")
+    exit()
+
+# SLOT MACHINE FUNCTIONS
+def spin_row():
+    symbols = ['7️⃣', '🪙', '🔔', '💎']
+    return [random.choice(symbols) for _ in range(3)]
+
+def print_row(row):
+    print("**************")
+    print(" | ".join(row))
+    print("**************")
+
+def get_payout(row, bet):
+    if row[0] == row[1] == row[2]:
+        if row[0] == '7️⃣':
+            return bet * 3
+        elif row[0] == '🪙':
+            return bet * 4
+        elif row[0] == '🔔':
+            return bet * 5
+        elif row[0] == '💎':
+            return bet * 10
+    return 0
+
+# BLACKJACK SETUP
+card_categories = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+cards_list = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']
+
+def create_deck():
+    deck = [(card, category) for category in card_categories for card in cards_list]
+    random.shuffle(deck)
+    return deck
+
+def card_value(card):
+    if card[0] in ['Jack', 'Queen', 'King']:
+        return 10
+    elif card[0] == 'Ace':
+        return 11
+    else:
+        return int(card[0])
+
+def calculate_score(hand):
+    score = sum(card_value(card) for card in hand)
+
+    # Adjust Ace if bust
+    aces = sum(1 for card in hand if card[0] == 'Ace')
+    while score > 21 and aces:
+        score -= 10
+        aces -= 1
+
+    return score
+
+# MAIN MENU LOOP
+while True:
+    print("\nCasino Royale!")
+    print(f"You got ${balance}")
+    print(f"WELCOME {user}!")
+
+    print("1) Play Blackjack")
+    print("2) Play the Slot Machine")
+    print("3) Read a guide")
+    print("4) Walk out (quit)")
+
+    try:
+        menuchoice = int(input("I pick option: "))
+    except:
+        print("Invalid input.")
+        continue
+
+    # BLACKJACK
+    if menuchoice == 1:
+        while balance > 0:
+            print(f"\nCurrent balance: ${balance}")
+            bet = input("Place your bet (0 to stop): ")
+
+            if not bet.isdigit():
+                print("Enter a valid number.")
+                continue
+
+            bet = int(bet)
+
+            if bet == 0:
+                break
+
+            if bet > balance:
+                print("Insufficient funds.")
+                continue
+
+            deck = create_deck()
+            pc = [deck.pop(), deck.pop()]
+            dc = [deck.pop(), deck.pop()]
+
+            # PLAYER TURN
+            while True:
+                ps = calculate_score(pc)
+                print("\nYour cards:", pc)
+                print("Your score:", ps)
+
+                if ps > 21:
+                    print("You busted!")
+                    balance -= bet
+                    break
+
+                choice = input('Type "hit" or "stand": ').lower()
+
+                if choice == "hit":
+                    pc.append(deck.pop())
+                elif choice == "stand":
+                    break
+                else:
+                    print("Invalid choice.")
+
+            # DEALER TURN
+            ps = calculate_score(pc)
+            if ps <= 21:
+                while calculate_score(dc) < 17:
+                    dc.append(deck.pop())
+
+                ds = calculate_score(dc)
+
+                print("\nDealer cards:", dc)
+                print("Dealer score:", ds)
+
+                if ds > 21 or ps > ds:
+                    print("You win!")
+                    balance += bet
+                elif ds > ps:
+                    print("Dealer wins!")
+                    balance -= bet
+                else:
+                    print("It's a tie!")
+
+    # SLOT MACHINE
+    elif menuchoice == 2:
+        print("\nWelcome to Python Slots")
+        print("Symbols: 7️⃣ 🪙 🔔 💎")
+
+        while balance > 0:
+            print(f"\nCurrent balance: ${balance}")
+            bet = input("Place your bet: ")
+
+            if not bet.isdigit():
+                print("Enter a valid number.")
+                continue
+
+            bet = int(bet)
+
+            if bet > balance:
+                print("Insufficient funds.")
+                begs = input("Do you want to beg? (yes/no): ").lower()
+
+                if begs == "yes":
+                    if random.random() < 0.10:
+                        print("You received $5!")
+                        balance += 5
+                    else:
+                        print("Begging failed.")
+                elif begs == "no":
+                    print("You kept your dignity.")
+                continue
+
+            if bet <= 0:
+                print("Bet must be greater than 0.")
+                continue
+
+            balance -= bet
+            row = spin_row()
+
+            print("\nSpinning...\n")
+            print_row(row)
+
+            payout = get_payout(row, bet)
+
+            if payout > 0:
+                print(f"You won ${payout}")
+            else:
+                print("You lost.")
+
+            balance += payout
+
+            again = input("Play again? (Y/N): ").upper()
+            if again != "Y":
+                break
+
+    # GUIDE
+    elif menuchoice == 3:
+
+        print("Casino Royale was founded by Isabelo, Dilan, and Joacquin for the entertainment of all,")
+        print("At NO FINANCIAL RISK!!!")
+        print("It was also founded for the sake of learning, teaching others how random variables work,")
+        print("and for simulating how a casino would probably go, so you don't make the same mistake.")
+        print("")
+        print("\nCasino Royale Guide")
+        print("BLACKJACK:")
+        print("- Try to get as close to 21 as possible without going over.")
+        print("- Beat the dealer to win.\n")
+        print("SLOTS:")
+        print("- Match 3 symbols to win.")
+        print("- Different symbols give different payouts.\n")
+
+    # EXIT
+    elif menuchoice == 4:
+        print("Thanks for playing!")
+        break
+
+    else:
+        print("Invalid option.")
 
