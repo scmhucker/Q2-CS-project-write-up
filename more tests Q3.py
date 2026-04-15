@@ -233,6 +233,17 @@ try:
 
             if bet > balance:
                 print("Insufficient funds")
+                begs = input("Yes or no")
+                if begs == "yes" or "Yes":
+                    percentage_chance = 0.10
+                    if random.random() < percentage_chance:
+                        balance = 5
+                    else:
+                        print("It did not work")
+                elif begs == "no" or "No":
+                    print("You decided to keep your dignity")
+                else:
+                    print("Pick a valid option")
                 continue
 
             if bet <= 0:
