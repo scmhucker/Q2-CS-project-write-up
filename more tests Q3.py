@@ -7,13 +7,21 @@ try:
     # READING from the file
     filename = "starting_money.json"
     with open(filename, 'r') as file:
-
+        data = json.load(file)
+        moneylist = []
+        for type in data:
+            moneylist.append(type["Money"])
         user = input("What is your name?: ")
-        mode = input("What Mode do you want")
         print("A. Poor")
         print("B. Middle Class")
         print("C. Rich")
-        balance = 100
+        mode = input("What mode will you play today?:")
+        if mode == "A" or mode == "a":
+            balance = moneylist[0]
+        if mode == "B" or mode == "b":
+            balance = moneylist[1]
+        if mode == "C" or mode == "c":
+            balance = moneylist[2]
 
 
 # functions
