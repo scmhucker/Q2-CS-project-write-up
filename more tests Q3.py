@@ -22,6 +22,8 @@ try:
             balance = moneylist[1]
         if mode == "C" or mode == "c":
             balance = moneylist[2]
+            else print("invalid mode")
+                      
 
 
 # functions
